@@ -1,11 +1,14 @@
 package br.dev.gabriel.classificadora.Model;
 
+import java.util.List;
+
 public class IPInfos {
 
     private String classe;
     private String mascaraBinaria;
     private String mascaraDecimal;
     private String numeroSubRedes;
+    private List<List<String>> subRedesCompletas; // Lista com detalhes completos de cada sub-rede
 
     public IPInfos(String ipCidr) {
         this.classe = encontraClasse(ipCidr);
@@ -17,7 +20,8 @@ public class IPInfos {
         SubRedeInfos subRede = new SubRedeInfos(ipCidr, this.classe);
         this.numeroSubRedes = subRede.calcularNumeroSubRedes();
 
-        
+        // Chama o método que retorna a lista completa com detalhes de cada sub-rede
+        this.subRedesCompletas = subRede.obterSubRedesCompletas();
     }
 
     private String encontraClasse(String ipCidr) {
@@ -66,7 +70,10 @@ public class IPInfos {
     }
 
     public String getNumeroSubRedes() {
-    return numeroSubRedes;
-}
+        return numeroSubRedes;
+    }
 
+    public List<List<String>> getSubRedesCompletas() {
+        return subRedesCompletas;
+    }
 }
