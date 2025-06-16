@@ -4,11 +4,13 @@ public class IPInfos {
 
     private String classe;
     private String mascaraBinaria;
+    private String mascaraDecimal;
 
     public IPInfos(String ipCidr) {
         this.classe = encontraClasse(ipCidr);
         MascaraInfos mascara = new MascaraInfos(ipCidr);
         this.mascaraBinaria = mascara.mascaraBinario();
+        this.mascaraDecimal = mascara.mascaraDecimal();
     }
 
     private String encontraClasse(String ipCidr) {
@@ -50,5 +52,9 @@ public class IPInfos {
 
     public String getMascaraBinaria() {
         return mascaraBinaria;
+    }
+
+    public String getMascaraDecimal() {
+        return mascaraDecimal;
     }
 }
