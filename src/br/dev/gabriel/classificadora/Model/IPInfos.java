@@ -5,12 +5,19 @@ public class IPInfos {
     private String classe;
     private String mascaraBinaria;
     private String mascaraDecimal;
+    private String numeroSubRedes;
 
     public IPInfos(String ipCidr) {
         this.classe = encontraClasse(ipCidr);
+
         MascaraInfos mascara = new MascaraInfos(ipCidr);
         this.mascaraBinaria = mascara.mascaraBinario();
         this.mascaraDecimal = mascara.mascaraDecimal();
+
+        SubRedeInfos subRede = new SubRedeInfos(ipCidr, this.classe);
+        this.numeroSubRedes = subRede.calcularNumeroSubRedes();
+
+        
     }
 
     private String encontraClasse(String ipCidr) {
@@ -57,4 +64,9 @@ public class IPInfos {
     public String getMascaraDecimal() {
         return mascaraDecimal;
     }
+
+    public String getNumeroSubRedes() {
+    return numeroSubRedes;
+}
+
 }
