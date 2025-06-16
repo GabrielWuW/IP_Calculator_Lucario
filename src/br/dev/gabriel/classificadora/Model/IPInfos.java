@@ -2,20 +2,21 @@ package br.dev.gabriel.classificadora.Model;
 
 public class IPInfos {
 
-    public String classe;
+    private String classe;
+    private String mascaraBinaria;
 
     public IPInfos(String ipCidr) {
         this.classe = encontraClasse(ipCidr);
+        MascaraInfos mascara = new MascaraInfos(ipCidr);
+        this.mascaraBinaria = mascara.mascaraBinario();
     }
 
     private String encontraClasse(String ipCidr) {
-        // Separando o IP do CIDR e verificando se eles estão corretos
         String[] partes = ipCidr.split("/");
         if (partes.length != 2) {
-            throw new IllegalArgumentException("Ops, verifique seu IP. Formato esperado: IP/CIDR");
+            throw new IllegalArgumentException("Ops, verifique seu IP...");
         }
 
-        // Dividindo o IP em octetos e verificando se existem 4 octetos
         String[] octetos = partes[0].split("\\.");
         if (octetos.length != 4) {
             throw new IllegalArgumentException("Seu IP está com um formato inválido...");
@@ -28,7 +29,6 @@ public class IPInfos {
             throw new IllegalArgumentException("Primeiro octeto inválido: " + octetos[0]);
         }
 
-        // Verificando a classe do IP
         if (primeiroOcteto >= 0 && primeiroOcteto <= 127) {
             return "A";
         } else if (primeiroOcteto >= 128 && primeiroOcteto <= 191) {
@@ -42,5 +42,13 @@ public class IPInfos {
         } else {
             throw new IllegalArgumentException("Não foi possível classificar seu IP :(");
         }
+    }
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public String getMascaraBinaria() {
+        return mascaraBinaria;
     }
 }
