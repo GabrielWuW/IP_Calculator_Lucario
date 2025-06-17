@@ -8,7 +8,7 @@ public class IPInfos {
     private String mascaraBinaria;
     private String mascaraDecimal;
     private String numeroSubRedes;
-    private List<List<String>> subRedesCompletas; // Lista com detalhes completos de cada sub-rede
+    private List<List<String>> subRedesCompletas;
 
     public IPInfos(String ipCidr) {
         this.classe = encontraClasse(ipCidr);
